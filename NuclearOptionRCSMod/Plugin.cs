@@ -66,7 +66,7 @@ namespace NuclearOptionRCSMod
     {
         private static readonly string[] _customHints = new string[]
         {
-            "Wide Tom's Bean House is known worldwide for it's variety of bean cuisine. The only complaints it's ever recieved are for constant flatulance in the patrons.",
+            "Wide Tom's Bean House is known worldwide for it's variety of bean cuisine. The only complaints its ever recieved are for constant flatulance in the patrons.",
             "Move freight! Miners don't die! - Randolph P Checkers Esq., Quartermaster.",
             "It's never a warcrime the first time...",
             "Guinness Book of World Records has Tom Tombadil's home stove as the widest home stovetop in existance.",
