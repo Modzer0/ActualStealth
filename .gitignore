@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+
+# BepInEx runtime
+BepInEx/
+
+# Decompiled game code (not ours to distribute)
+decompiled/
+decompiled qol/
+
+# IDE
+.vs/
+*.user
+*.suo
+
+# Kiro
+.kiro/
