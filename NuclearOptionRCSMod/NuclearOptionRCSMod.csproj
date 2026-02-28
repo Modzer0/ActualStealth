@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <AssemblyName>NuclearOptionRCSMod_0.1.0-beta</AssemblyName>
-    <Version>0.1.0</Version>
+    <AssemblyName>NuclearOptionRCSMod_0.2.0</AssemblyName>
+    <Version>0.2.0</Version>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

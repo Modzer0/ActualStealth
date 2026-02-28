@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace NuclearOptionRCSMod
 {
-    [BepInPlugin("com.nuclearoption.rcsmod", "Nuclear Option RCS Mod", "0.1.0")]
+    [BepInPlugin("com.nuclearoption.rcsmod", "Nuclear Option RCS Mod", "0.2.0")]
     public class Plugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
