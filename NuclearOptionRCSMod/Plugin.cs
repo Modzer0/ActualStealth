@@ -16,6 +16,7 @@ namespace NuclearOptionRCSMod
         internal static ConfigEntry<float> VortexDivisor;
         internal static ConfigEntry<float> IfritDivisor;
         internal static ConfigEntry<float> DarkreachDivisor;
+        internal static ConfigEntry<float> MedusaRadarMultiplier;
 
         private void Awake()
         {
@@ -27,6 +28,9 @@ namespace NuclearOptionRCSMod
                 "RCS divisor for the KR-67A Ifrit (Multirole1)");
             DarkreachDivisor = Config.Bind("RCS Divisors", "Darkreach", 100f,
                 "RCS divisor for the SFB-81 Darkreach");
+
+            MedusaRadarMultiplier = Config.Bind("Radar", "MedusaRadarMultiplier", 2f,
+                "Multiplier for the Medusa (EW1) radome signal strength (applied to maxRange)");
 
             new Harmony("com.nuclearoption.rcsmod").PatchAll();
             Logger.LogInfo("RCS Mod loaded");
@@ -58,6 +62,30 @@ namespace NuclearOptionRCSMod
                 __instance.RCS = originalRCS / divisor;
                 Plugin.Log.LogInfo($"[RCS Mod] {name}: RCS {originalRCS} -> {__instance.RCS} (divisor: {divisor})");
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(Radar), "AttachToUnit")]
+    public static class RadarAttachPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Radar __instance, Unit unit)
+        {
+            if (unit == null) return;
+
+            string unitName = unit.gameObject.name.Replace("(Clone)", "").Trim();
+            if (unitName != "EW1") return;
+
+            // Only boost the radome equipment, not any built-in radar
+            string radarObjName = __instance.gameObject.name;
+            if (!radarObjName.Contains("Radome")) return;
+
+            float multiplier = Plugin.MedusaRadarMultiplier.Value;
+            if (multiplier <= 0f || multiplier == 1f) return;
+
+            float originalRange = __instance.RadarParameters.maxRange;
+            __instance.RadarParameters.maxRange *= multiplier;
+            Plugin.Log.LogInfo($"[RCS Mod] Medusa radome ({radarObjName}): maxRange {originalRange} -> {__instance.RadarParameters.maxRange} (x{multiplier})");
         }
     }
 
